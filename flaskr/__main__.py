@@ -1,16 +1,9 @@
-import time
 from flask import Flask, render_template, Response
 from waitress import serve
+from flaskr.config import settings
+from flaskr.lib import aws, global_variables
 
 app = Flask(__name__)
-
-def get_message(id):
-    '''this could be any function that blocks until data is ready'''
-
-    time.sleep(float(id))
-
-    s = time.ctime(time.time())
-    return s
 
 
 @app.route('/')
@@ -24,10 +17,10 @@ def stream(id):
         print(id)
         while True:
             # wait for source data to be available, then push it
-            yield 'data: {}-{}\n\n'.format(id,get_message(id))
+            yield 'data: {}-{}\n\n'.format(id,aws.get_message(id))
     return Response(eventStream(), mimetype="text/event-stream")
 
 
 if __name__ == "__main__":
-    #app.run(host='0.0.0.0', port=80)
+    global_variables.EMR_INIT_OBJ = aws.EMR(job_id=settings.EMR_JOB_ID)
     serve(app, host='0.0.0.0', port=80)
