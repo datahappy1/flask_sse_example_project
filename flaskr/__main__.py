@@ -8,16 +8,19 @@ app = Flask(__name__)
 
 @app.route('/')
 def root():
-    return render_template('index.html')
+    return render_template('index.html', emr_job_id = settings.EMR_JOB_ID)
 
 
-@app.route('/stream/<int:id>', methods = ['GET'])
-def stream(id):
+@app.route('/streams/', methods = ['GET'])
+#def stream(id):
+def stream():
     def eventStream():
-        print(id)
         while True:
             # wait for source data to be available, then push it
-            yield 'data: {}-{}\n\n'.format(id,aws.get_message(id))
+            #yield 'data: {}-{}\n\n'.format(id,aws.get_message(id))
+            stream = 'data: {}\n\n'.format(aws.fetch_step_states(job_id=1))
+            yield stream
+
     return Response(eventStream(), mimetype="text/event-stream")
 
 
