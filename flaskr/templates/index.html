@@ -1,4 +1,3 @@
-{% include 'header.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,20 +6,24 @@
 </head>
 <body>
 
-<!--<a id="1" href="{{ url_for('main', id=1) }}" target="_blank">SSE id 1</a>-->
-<!--<a id="2" href="{{ url_for('main', id=2) }}" target="_blank">SSE id 2</a>-->
+<div id="target_div">Loading...</div>
 
-<div id="target_div">Watch this space...</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.3.0/json2html.min.js"></script>
 
 <script type="text/javascript">
-var targetContainer = document.getElementById("target_div");
-//var myParam = location.search.split('id=')[1]
 
-//var eventSource = new EventSource("/stream/"+myParam)
+let template = {'<>':'div','html':'${step_name} ${step_state}'};
+var targetContainer = document.getElementById("target_div");
+
 var eventSource = new EventSource("/streams/")
   eventSource.onmessage = function(e) {
-  targetContainer.innerHTML = e.data;
-};</script>
+  console.log(e.data);
+  targetContainer.innerHTML = json2html.transform(e.data,template);
+};
+
+
+</script>
+
 
 </body>
 </html>

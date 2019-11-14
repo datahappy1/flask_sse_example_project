@@ -1,5 +1,5 @@
 # flask_sse_example_project
-Flask, Waitress and Javascript used for multiple Server-side event streams to enable AWS EMR job console auto-refresh
+Flask, Waitress and Javascript used for multiple Server-sent event streams to enable AWS EMR job console auto-refresh
 and EMR step triggering
 
 
