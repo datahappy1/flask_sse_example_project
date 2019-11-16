@@ -1,1 +1,0 @@
-EMR_INIT_OBJ = None

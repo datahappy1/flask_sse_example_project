@@ -2,18 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Flask SSE</title>
+    <title>Flask SSE JS Example project</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 
-<div id="target_div">Loading...</div>
+<table id="target_table" class="table table-sm">
+    <thead class="thead-dark">
+        <tr>
+            <th>step name</th>
+            <th>step state</th>
+        </tr>
+    </thead>
+    <tbody id="target_body">
+        <!--here go the SSE stream rows transformed from JSON to HTML in the script below-->
+    </tbody>
+</table>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.3.0/json2html.min.js"></script>
-
 <script type="text/javascript">
 
-let template = {'<>':'div','html':'${step_name} ${step_state}'};
-var targetContainer = document.getElementById("target_div");
+let template = {'<>':'tr','html':[
+                    {'<>':'td','text':'${step_name}'},
+                    {'<>':'td','text':'${step_state}'}
+                ]};
+
+var targetContainer = document.getElementById("target_body");
 
 var eventSource = new EventSource("/streams/")
   eventSource.onmessage = function(e) {
@@ -21,9 +35,7 @@ var eventSource = new EventSource("/streams/")
   targetContainer.innerHTML = json2html.transform(e.data,template);
 };
 
-
 </script>
-
 
 </body>
 </html>
