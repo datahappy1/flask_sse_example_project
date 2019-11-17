@@ -4,18 +4,22 @@ Flask, Waitress and Javascript used for 1-N Server-sent event streams to enable 
 *Currently designed to run on Windows, but if you replace Waitress WSGI with Gunicorn for instance, can
 run also on *nix based OS
 
-## Diagram 10000 ft. overview
+## 10000 ft. overview Diagram
 ![alt text][diagram]
 
 [diagram]: https://github.com/datahappy1/flask_sse_example_project/blob/master/flaskr/docs/diagram.png "diagram"
 
+## Screenshots from the web app
+[screens]: https://github.com/datahappy1/flask_sse_example_project/blob/master/flaskr/docs/screens.gif "screens"
+
+
 ## How it works
 1) Flask backend before each app startup imports blueprints with the SSE streaming routes from the folder `/blueprints/`
-2) These routes publish the events into `http://127.0.0.1:5000/streams/<stream_name>`
+2) These routes publish the events into `http://127.0.0.1:80/streams/<stream_name>`
 3) Flask generates the HTML templates, template `stream.html` has JavaScript code attached, which uses
 JSON2HTML JS library to change the event stream from JSON to HTML table rows and injects these rows in the 
 table used for jobs statuses visualization
-4) You can create a new stream by adding importing into `__main__.py` a new blueprint
+4) You can create a new stream by importing into `__main__.py` a new blueprint
 
 
 ## How to get started

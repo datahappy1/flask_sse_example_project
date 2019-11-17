@@ -7,7 +7,7 @@
         <ul class="navbar-nav mr-auto">
             {% for item in menu_items %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('stream', stream_name=item[1]) }}" target="stream">{{ item[1] }}</a>
+                    <a class="nav-link" href="{{ url_for('stream', stream_name=item[1]) }}">{{ item[1] }}</a>
                 </li>
             {% endfor %}
         </ul>
