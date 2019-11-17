@@ -1,7 +1,8 @@
 {% extends "index.html" %}
 {% block stream %}
 
-<h1>Error page</h1>
-<h2>Error message: {{ template_error_message }}</h2>
+<div class="alert alert-danger">
+  <strong>Error message:</strong> {{template_error_message }}
+</div>
 
 {% endblock %}
