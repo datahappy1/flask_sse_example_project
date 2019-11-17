@@ -10,7 +10,7 @@ app.register_blueprint(SSE_STREAM_1)
 app.register_blueprint(SSE_STREAM_2)
 
 BLUEPRINTS_REGISTERED = app.blueprints.keys()
-THREADS = len(BLUEPRINTS_REGISTERED)
+THREADS_COUNT = len(BLUEPRINTS_REGISTERED)
 
 @app.context_processor
 def menu_items():
@@ -40,4 +40,4 @@ def stream(stream_name):
 
 
 if __name__ == "__main__":
-    serve(app, host='0.0.0.0', port=80, threads=THREADS)
+    serve(app, host='0.0.0.0', port=80, threads=THREADS_COUNT)
