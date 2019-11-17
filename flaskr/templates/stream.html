@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+{% block stream %}
+
+<table id="target_table" class="table table-sm">
+    <thead class="thead-dark">
+    <tr>
+        <th>job name</th>
+        <th>job state</th>
+    </tr>
+    </thead>
+    <tbody id="target_body">
+    <!--here go the SSE stream rows transformed from JSON to HTML in the script below-->
+    </tbody>
+</table>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.3.0/json2html.min.js"></script>
+<script type="text/javascript">
+
+let template = {'<>':'tr','html':[
+                    {'<>':'td','text':'${job_name}'},
+                    {'<>':'td','text':'${job_state}'}
+                ]};
+
+var targetContainer = document.getElementById("target_body");
+
+var eventSource = new EventSource("streams/{{ template_stream_name }}")
+  eventSource.onmessage = function(e) {
+  //for debugging:
+  //console.log(e.data);
+  targetContainer.innerHTML = json2html.transform(e.data,template);
+};
+
+
+</script>
+
+{% endblock %}

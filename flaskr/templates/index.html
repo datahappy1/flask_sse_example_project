@@ -1,41 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Flask SSE JS Example project</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
 
-<table id="target_table" class="table table-sm">
-    <thead class="thead-dark">
-        <tr>
-            <th>step name</th>
-            <th>step state</th>
-        </tr>
-    </thead>
-    <tbody id="target_body">
-        <!--here go the SSE stream rows transformed from JSON to HTML in the script below-->
-    </tbody>
-</table>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ url_for('main') }}">Flask SSE JS example project</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            {% for item in menu_items %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('stream', stream_name=item[1]) }}" target="stream">{{ item[1] }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.3.0/json2html.min.js"></script>
-<script type="text/javascript">
+<div>
+    <p>
+    Click a link in the top menu to see the auto-refresh job state table for a specific stream
+    </p>
+</div>
 
-let template = {'<>':'tr','html':[
-                    {'<>':'td','text':'${step_name}'},
-                    {'<>':'td','text':'${step_state}'}
-                ]};
+{% block stream %}
+{% endblock %}
 
-var targetContainer = document.getElementById("target_body");
-
-var eventSource = new EventSource("/streams/")
-  eventSource.onmessage = function(e) {
-  console.log(e.data);
-  targetContainer.innerHTML = json2html.transform(e.data,template);
-};
-
-</script>
-
-</body>
-</html>
+{% endblock %}
