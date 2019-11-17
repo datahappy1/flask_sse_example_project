@@ -10,6 +10,8 @@ run also on *nix based OS
 [diagram]: https://github.com/datahappy1/flask_sse_example_project/blob/master/flaskr/docs/diagram.png "diagram"
 
 ## Screenshots from the web app
+![alt text][screens]
+
 [screens]: https://github.com/datahappy1/flask_sse_example_project/blob/master/flaskr/docs/screens.gif "screens"
 
 
