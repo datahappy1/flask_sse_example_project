@@ -54,7 +54,6 @@ def stream(stream_name):
     :return:
     """
     if stream_name not in BLUEPRINTS_REGISTERED:
-        print('ku')
         return render_template('error_page.html',
                                template_error_message='stream not found in imported Flask Blueprints')
     else:
