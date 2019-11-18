@@ -8,12 +8,12 @@ SSE_STREAM_1 = Blueprint('sse_stream_1', __name__)
 
 
 @SSE_STREAM_1.route('/streams/sse_stream_1', methods=['GET'])
-def stream():
+def sse_stream():
     """
     function stream
     :return:
     """
-    def eventStream():
+    def event_stream():
         """
         function eventStream
         :return:
@@ -22,4 +22,4 @@ def stream():
             stream = 'data: {}\n\n'.format(job_runner.fetch_job_states())
             yield stream
 
-    return Response(eventStream(), mimetype="text/event-stream")
+    return Response(event_stream(), mimetype="text/event-stream")

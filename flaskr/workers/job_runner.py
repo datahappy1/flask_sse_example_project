@@ -22,7 +22,8 @@ def fetch_job_states():
 
     if random.randint(0, 2) == 1:
         time.sleep(1)
-        return json.dumps(job1)
+        return_value = json.dumps(job1)
     else:
         time.sleep(2)
-        return json.dumps(job2)
+        return_value = json.dumps(job2)
+    return return_value

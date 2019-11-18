@@ -7,15 +7,15 @@ from waitress import serve
 from flaskr.blueprints.sse_stream_1 import SSE_STREAM_1
 from flaskr.blueprints.sse_stream_2 import SSE_STREAM_2
 
-app = Flask(__name__)
+APP = Flask(__name__)
 
-app.register_blueprint(SSE_STREAM_1)
-app.register_blueprint(SSE_STREAM_2)
+APP.register_blueprint(SSE_STREAM_1)
+APP.register_blueprint(SSE_STREAM_2)
 
-BLUEPRINTS_REGISTERED = app.blueprints.keys()
+BLUEPRINTS_REGISTERED = APP.blueprints.keys()
 THREADS_COUNT = len(BLUEPRINTS_REGISTERED)
 
-@app.context_processor
+@APP.context_processor
 def menu_items():
     """
     context processor for sending menu items
@@ -23,21 +23,21 @@ def menu_items():
     blueprints with the SSE streams
     :return:
     """
-    menu_items = enumerate(BLUEPRINTS_REGISTERED)
-    return dict(menu_items=menu_items)
+    blueprints_enum = enumerate(BLUEPRINTS_REGISTERED)
+    return dict(menu_items=blueprints_enum)
 
 
-@app.route('/favicon.ico')
+@APP.route('/favicon.ico')
 def favicon():
     """
     function to properly handle favicon
     :return:
     """
-    return send_from_directory(os.path.join(app.root_path, 'static'),
+    return send_from_directory(os.path.join(APP.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
-@app.route('/', methods=['GET'])
+@APP.route('/', methods=['GET'])
 def main():
     """
     the main rout rendering index.html
@@ -46,7 +46,7 @@ def main():
     return render_template('index.html')
 
 
-@app.route('/<string:stream_name>', methods=['GET'])
+@APP.route('/<string:stream_name>', methods=['GET'])
 def stream(stream_name):
     """
     the stream route rendering stream.html
@@ -54,6 +54,7 @@ def stream(stream_name):
     :return:
     """
     if stream_name not in BLUEPRINTS_REGISTERED:
+        print('ku')
         return render_template('error_page.html',
                                template_error_message='stream not found in imported Flask Blueprints')
     else:
@@ -62,4 +63,4 @@ def stream(stream_name):
 
 
 if __name__ == "__main__":
-    serve(app, host='0.0.0.0', port=80, threads=THREADS_COUNT)
+    serve(APP, host='0.0.0.0', port=80, threads=THREADS_COUNT)
