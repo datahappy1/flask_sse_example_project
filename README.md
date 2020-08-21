@@ -29,7 +29,7 @@ table used for jobs statuses visualization
 2) Create and activate yourself a Python virtual environment
 3) run `pip3 install -r requirements.txt`
 4) set your Windows Python working directory to `C:\<<<folder where you cloned this repo to>>>\flaskr`
-5) run `python3 C:\<<<folder where you cloned this repo to>>>\flaskr\__main__.py`
+5) run `python3 C:\<<<folder where you cloned this repo to>>>\flaskr\app.py`
 
 ### Useful links:
 - https://stackoverflow.com/questions/30645664/how-to-stop-server-sent-events 
