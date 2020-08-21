@@ -21,7 +21,7 @@ run also on *nix based OS
 3) Flask generates the HTML templates, template `stream.html` has JavaScript code attached, which uses
 JSON2HTML JS library to change the event stream from JSON to HTML table rows and injects these rows in the 
 table used for jobs statuses visualization
-4) You can create a new stream by importing into `__main__.py` a new blueprint
+4) You can create a new stream by importing and registering into `app.py` a new blueprint
 
 
 ## How to get started
