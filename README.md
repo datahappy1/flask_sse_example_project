@@ -1,8 +1,12 @@
 # Flask, SSE, JS example project
 Flask, Waitress and Javascript used for 1-N Server-sent event streams to enable long running jobs state auto-refresh visualized in a HTML table in the browser
 
-*Currently designed to run on Windows, but if you replace Waitress WSGI with Gunicorn for instance, can
+> Server-Sent Events (SSE) is a server push technology enabling a client to receive automatic updates from a server via HTTP connection. The Server-Sent Events EventSource API is standardized as part of HTML5 by the W3C.
+
+Currently this project is designed to run on Windows, but if you replace Waitress WSGI with Gunicorn for instance, it can
 run also on *nix based OS
+
+This project needs to be run in a browser fully supporting HTML5 
 
 ## 10000 ft. overview Diagram
 ![alt text][diagram]

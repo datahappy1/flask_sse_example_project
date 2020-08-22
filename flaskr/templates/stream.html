@@ -17,24 +17,8 @@
     </tbody>
 </table>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.3.0/json2html.min.js"></script>
-<script type="text/javascript">
-
-let template = {'<>':'tr','html':[
-                    {'<>':'td','text':'${job_name}'},
-                    {'<>':'td','text':'${job_state}'}
-                ]};
-
-var targetContainer = document.getElementById("target_body");
-
-var eventSource = new EventSource("streams/{{ template_stream_name }}")
-  eventSource.onmessage = function(e) {
-  //for debugging:
-  //console.log(e.data);
-  targetContainer.innerHTML = json2html.transform(e.data,template);
-};
-
-
-</script>
+<script src="{{url_for('static', filename='js/external/json2html/1.3.0/json2html.min.js')}}"></script>
+<script id="stream" data-stream-name="{{ template_stream_name }}"
+        src="{{url_for('static', filename='js/sse_stream.js')}}"></script>
 
 {% endblock %}

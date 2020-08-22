@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand navbar-dark bg-dark">
     <a class="navbar-brand" href="{{ url_for('main') }}">Flask SSE JS example project</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -14,11 +14,14 @@
     </div>
 </nav>
 
-<div class="alert alert-info">
-    Click a link in the top menu to see the auto-refresh job state table for a specific stream
+<div class="container-fluid">
+    <div class="alert alert-info mt-4">
+        Click a stream name link in the top menu to see the job states get auto-refreshed for this specific stream
+    </div>
+
+    {% block stream %}
+    {% endblock %}
 </div>
 
-{% block stream %}
 {% endblock %}
 
-{% endblock %}
