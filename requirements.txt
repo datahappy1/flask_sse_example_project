@@ -1,2 +1,2 @@
-flask==1.1.1
+flask==2.3.2
 waitress>=1.4.1
